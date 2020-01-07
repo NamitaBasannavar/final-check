@@ -2,16 +2,14 @@ package com.cognizant.moviecruiser.dao;
 
 import java.util.List;
 
-import com.cognizant.moviecruiser.model.MovieItem;
+import com.cognizant.moviecruiser.model.Movie;
 
 public interface FavoriteDao {
 
-	public void addFavoriteItem(long userId, long movieItemId);
+	public void addFavorite(long userId, long MovieId);
 
-	public List<MovieItem> getAllFavoriteItems(long userId) throws FavoriteEmptyException;
+	public List<Movie> getAllFavorite(long userId) throws FavoriteEmptyException;
 
-	public void removeFavoriteItem(long userId, long movieItemId);
-
-	
+	public void removeFavorite(long userId, long MovieId) throws FavoriteEmptyException;
 
 }

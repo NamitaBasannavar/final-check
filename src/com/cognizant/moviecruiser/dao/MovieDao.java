@@ -1,17 +1,17 @@
 package com.cognizant.moviecruiser.dao;
 
-import java.awt.MenuItem;
 import java.util.List;
 
-import com.cognizant.moviecruiser.model.MovieItem;
+import com.cognizant.moviecruiser.model.Movie;
 
 public interface MovieDao {
-	public List<MovieItem> getMovieItemListAdmin();
 
-	public List<MovieItem> getMovieItemListCustomer();
+	public List<Movie> getMovieListAdmin();
 
-	public void modifyMovieItem(MovieItem MovieItem);
+	public List<Movie> getMovieListCustomer();
 
-	public MovieItem getMovieItem(long movieItemId);
+	public void modifyMovie(Movie movie);
+
+	public Movie getMovie(long MovieId);
 
 }

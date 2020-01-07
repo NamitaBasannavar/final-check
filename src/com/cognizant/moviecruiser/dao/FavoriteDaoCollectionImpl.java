@@ -1,76 +1,66 @@
 package com.cognizant.moviecruiser.dao;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
-import com.cognizant.moviecruiser.model.Favorites;
-import com.cognizant.moviecruiser.model.MovieItem;
+import com.cognizant.moviecruiser.model.Favorite;
+import com.cognizant.moviecruiser.model.Movie;
 
 public class FavoriteDaoCollectionImpl implements FavoriteDao {
-
-	private static HashMap<Long, Favorites> userFavorites;
-	private double total;
+	private static HashMap<Long, Favorite> userFavorite;
 
 	public FavoriteDaoCollectionImpl() {
+		if (userFavorite == null) {
+			userFavorite = new HashMap<>();
+			userFavorite.put(1L, new Favorite());
 
-		if (userFavorites == null) {
-			userFavorites = new HashMap<>();
-			userFavorites.put(1l, new Favorites());
 		}
-
 	}
 
-	public void addFavoriteItem(long userId, long movieItemId) {
+	@Override
+	public void addFavorite(long userId, long movieId) {
 		try {
-			MovieDao movieItemDao = new MovieDaoCollectionImpl();
-			MovieItem movieItem = movieItemDao.getMovieItem(movieItemId);
-			if (userFavorites.containsKey(userId)) {
-				
-				Favorites favorite = userFavorites.get(userId);
-				favorite.getMovieItemList().add(movieItem);
+			MovieDao movieDao = new MovieDaoCollectionImpl();
+			Movie movie = movieDao.getMovie(movieId);
+
+			if (userFavorite.containsKey(userId)) {
+				Favorite favorite = userFavorite.get(userId);
+				favorite.getMovieList().add(movie);
 			} else {
-				Favorites favorite = new Favorites();
-				favorite.getMovieItemList().add(movieItem);
-				userFavorites.put(userId, favorite);
+				Favorite favorite = new Favorite();
+				favorite.getMovieList().add(movie);
+				userFavorite.put(userId, favorite);
 			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public List<MovieItem> getAllFavoriteItems(long userId) throws FavoriteEmptyException {
-		List<MovieItem> movieItemList = userFavorites.get(userId).getMovieItemList();
-		
-		
-		Favorites favorites = userFavorites.get(userId);
-		double total = 0.0;
-		if (favorites == null ||favorites.getMovieItemList() == null ||movieItemList.isEmpty()) {
+	public List<Movie> getAllFavorite(long userId) throws FavoriteEmptyException {
+		Favorite favorite = userFavorite.get(userId);
+
+		if (favorite == null || favorite.getMovieList() == null || favorite.getMovieList().isEmpty()) {
 			throw new FavoriteEmptyException();
-		} else {
-			for (MovieItem movieItem : movieItemList) {
-				total += movieItem.getBoxoffice();
-
-			}
 		}
-		return movieItemList;
-
+		List<Movie> movieList = userFavorite.get(userId).getMovieList();
+		return movieList;
 	}
 
 	@Override
-	public void removeFavoriteItem(long userId, long movieItemId) {
-		List<MovieItem> movieItemList = userFavorites.get(userId).getMovieItemList();
-		for (int i = 0; i < movieItemList.size(); i++) {
-			if (movieItemList.get(i).getId() == movieItemId) {
-				movieItemList.remove(i);
-				break;
+	public void removeFavorite(long userId, long MovieId) throws FavoriteEmptyException {
+		Favorite favorite = userFavorite.get(userId);
+		if (favorite != null && !favorite.getMovieList().isEmpty()) {
+			for (int i = 0; i < favorite.getMovieList().size(); i++) {
+				if (favorite.getMovieList().get(i).getId() == MovieId) {
+					favorite.getMovieList().remove(i);
+					break;
+				}
+
 			}
-
+		} else {
+			throw new FavoriteEmptyException("No Favorite");
 		}
-
 	}
-
-	
-
-
 }
