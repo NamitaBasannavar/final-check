@@ -17,7 +17,7 @@ values
 ---------------------------------------------------------------------
 -- Displaying  Movie List
 ---------------------------------------------------------------------
-select *from movie_list;
+select  me_id AS "Id" ,me_title AS "Title",  me_boxOffice AS "boxOffice", me_active  AS "active" ,me_date_of_launch As "date_of_launch" , me_genre AS  "genre" ,  me_hasteaser  AS  "hasteaser"  from movie_list;
 
 
 -------------------------------------------------------------------
@@ -33,7 +33,7 @@ where me_id=1;
 -- Displaying updated Movie list in Movie Cruiser Table
 -- -----------------------------------------------------------------
 
-select * from movie_list;
+select  me_id AS "Id" ,me_title AS "Title",  me_boxOffice AS "boxOffice", me_active  AS "active" ,me_date_of_launch As "date_of_launch" , me_genre AS  "genre" ,  me_hasteaser  AS  "hasteaser"  from movie_list;
 
 --------------------------------------------------------------
 -- creating User
@@ -41,7 +41,7 @@ select * from movie_list;
 insert into user values(1,'Namita'),
 (2,'Hradini');
 
-select * from user;
+select  us_id AS "Id", us_name AS "Name" from user;
 
 --------------------------------------------------------------
 -- Displaying customer List
@@ -60,7 +60,7 @@ insert into favorite (ft_us_id,ft_pr_id) values(2,1),(2,2);
 -- ---------------------------------------------------------
 -- Show Favorite
 -- -----------------------------------------------------------------
-select * from favorite;
+select  ft_id As "Id", ft_us_id As "us_id" ,ft_pr_id AS "pr_id" from favorite;
 
 
 - ---------------------------------------------------------
@@ -85,7 +85,7 @@ where ft_us_id=2;
 ---------------------------------------------------------------
 -- Display Favorite
 -----------------------------------------------------------------
-select * from favorite;
+select ft_id As "Id", ft_us_id As "us_id" ,ft_pr_id AS "pr_id" from favorite;
 
 - ---------------------------------------------------------
 -- Remove from favorite
@@ -97,7 +97,7 @@ delete from favorite where ft_us_id=2 and ft_pr_id=2 limit 1;
 - ---------------------------------------------------------
 -- Display favorite
 -- -----------------------------------------------------------------
-select * from favorite;
+select ft_id As "Id", ft_us_id As "us_id" ,ft_pr_id AS "pr_id" from favorite;
 
 
 -- ---------------------------------------------------------
