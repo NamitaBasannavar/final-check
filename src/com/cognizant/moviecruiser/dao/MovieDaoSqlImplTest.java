@@ -7,7 +7,7 @@
 		
 		import java.text.ParseException;
 		
-		public class MovieDaoCollectionImplTest {
+		public class MovieDaoSqlImplTest {
 		
 			public static void main(String[] args) {
 				try {
@@ -17,17 +17,17 @@
 					System.out.println("----------Customer List-----------");
 					System.out.println("Customer movie list ");
 					testGetMovieCustomer();
-					testModifyMovie();
+					
 					System.out.println("----------modified List-----------");
-					System.out.println("Modify movie list ");
-		
+					testModifyMovie();
+					testGetMovieAdmin();
 				} catch (ParseException e) {
 					System.out.println(e);
 				}
 			}
 		
 			public static void testGetMovieAdmin() throws ParseException {
-				MovieDao movieDao = new MovieDaoCollectionImpl();
+				MovieDao movieDao = new MovieDaoSqlImpl();
 				List<Movie> movieList = movieDao.getMovieListAdmin();
 				for (Movie x : movieList) {
 		
@@ -36,7 +36,7 @@
 			}
 		
 			public static void testGetMovieCustomer() throws ParseException {
-				MovieDao movieDao = new MovieDaoCollectionImpl();
+				MovieDao movieDao = new MovieDaoSqlImpl();
 				List<Movie> movieList = movieDao.getMovieListCustomer();
 				for (Movie x : movieList) {
 		
@@ -45,9 +45,9 @@
 			}
 		
 			public static void testModifyMovie() throws ParseException {
-				Movie m = new Movie(4, "Jurassic World", 1671713208l, false, DateUtil.convertToDate("02/07/2017"),
+				Movie m = new Movie(4, "Kgf", 1671713208l, false, DateUtil.convertToDate("02/07/2017"),
 						"Science Fiction", true);
-				MovieDao movieDao = new MovieDaoCollectionImpl();
+				MovieDao movieDao = new MovieDaoSqlImpl();
 				movieDao.modifyMovie(m);
 			}
 		

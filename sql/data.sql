@@ -13,7 +13,7 @@ values
 (4, 'Jurassic World', 1671713208, 'No', '2017-07-02','Science Fiction', 'Yes'),
 (5, 'Avatar', 2750760348, 'Yes','2022-11-02', 'Superhero', 'Yes');
 
-
+select * from movie_list;
 ---------------------------------------------------------------------
 -- Displaying  Movie List
 ---------------------------------------------------------------------
@@ -43,6 +43,8 @@ insert into user values(1,'Namita'),
 
 select  us_id AS "Id", us_name AS "Name" from user;
 
+select * from user;
+
 --------------------------------------------------------------
 -- Displaying customer List
 -- ----------------------------------------------------------
@@ -56,7 +58,8 @@ and me_date_of_launch <= current_date();
 -- -----------------------------------------------------------------
 insert into favorite (ft_us_id,ft_pr_id) values(2,1),(2,2);
 
-
+ select * from favorite;
+-- delete from favorite;
 -- ---------------------------------------------------------
 -- Show Favorite
 -- -----------------------------------------------------------------
